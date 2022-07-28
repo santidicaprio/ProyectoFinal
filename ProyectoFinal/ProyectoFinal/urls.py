@@ -23,5 +23,5 @@ from AppFinal.views import index
 urlpatterns = [
     path('admin', admin.site.urls),
     path('pagina', saludo),
-    path('boot', index)
+    path('boot', index) 
 ]
