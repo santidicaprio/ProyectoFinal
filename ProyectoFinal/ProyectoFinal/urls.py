@@ -18,10 +18,15 @@ from django.http import HttpResponse
 from django.urls import path, include
 
 from AppFinal.views import saludo
-from AppFinal.views import index
+from AppFinal.views import index, PanelLogin, signUpView
+
 
 urlpatterns = [
-    path('admin', admin.site.urls),
-    path('pagina', saludo),
-    path('boot', index) 
+    path('admin', admin.site.urls), 
+    path('pagina', saludo), 
+    path('boot', index),
+    path("login/", PanelLogin.as_view(), name="panel-login"),  ## acordarse de poner siempre name= link
+    path("registrate/", signUpView.as_view(), name= "registrate"),
+ 
+    
 ]
