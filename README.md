@@ -1,2 +1,2 @@
 # ProyectoFinal
-Hecho por Santiago David y Santiago Garcia
+Hecho por Santiago David, Sandra Dipacce y Santiago Garcia
