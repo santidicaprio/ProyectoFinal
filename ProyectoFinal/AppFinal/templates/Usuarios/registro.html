@@ -1,0 +1,44 @@
+{% extends "principal/base.html" %}
+
+
+{% block main %}
+
+<style>
+    main {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+    
+    
+</style>
+
+
+<body class="text-center">
+
+<main class="form-signin  m-auto">
+    
+    <form method="POST"> {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal"> Registrate </h1>
+        <div class="form-floating">
+            <input type="email" class="form-control"  id="floatingInput" >
+            <label for="floatingInput">Email </label>
+        </div>
+        <div class="form-floating">
+            <input type="Password" class="form-control"  id="floatingInput" >
+            <label for="floatingInput"> Contraseña </label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control"  id="floatingInput" >
+            <label for="floatingInput"> Repetir Contraseña  </label>
+        </div>
+        <a type="button"  href = "{% url "panel-login" %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary"> Crear Cuenta </a>       
+        <br></br>
+        <a href="{% url 'main-page' %}  ">Volver Atras</a>
+        
+    </form>
+</main>
+</body>
+{% endblock %}

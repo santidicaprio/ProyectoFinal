@@ -1,0 +1,51 @@
+{% extends "principal/base.html" %}
+
+{% block main %}
+
+  <section class="py-5 text-center container">
+    <div class="py-5 text-end ">
+      <a type="button"  href = "{% url "panel-login" %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary"> Ingresar </a>
+      <a type="button"  href = "{% url "registrate" %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary"> Registrate </a>
+    </div>
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light"> Panel Empleados </h1>
+        <p class="lead text-muted">Supermercado Alegria </p>
+        <p class="lead text-muted">Productos </p>
+       
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for Productos in Productos %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img height="225" src="#" />  
+            <div class="card-body">
+              <h5 class="card-title">{{Productos.categoria}}</h5>
+              <p class="card-text">{{Productos.tipo}}</p>
+              <div class="d-flex justify-content-between align-items-end">
+                <div class="btn-group">
+                {%if user.can_edit%}
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                {% endif %} 
+                <a type="button" href="#" class="btn btn-sm btn-outline-secondary">Buscar Productos </a>
+                </div>
+                <small class="text-muted">{{Productos.precio}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <a href="{% url 'main-page' %}  ">Volver Arriba</a>
+
+ 
+{% endblock %}

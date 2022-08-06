@@ -18,15 +18,22 @@ from django.http import HttpResponse
 from django.urls import path, include
 
 from AppFinal.views import saludo
-from AppFinal.views import index, PanelLogin, signUpView
+from AppFinal.views import index, PanelLogin, MainPageView, About, PanelView, registro, PorductosCreateView
+ 
 
 
 urlpatterns = [
-    path('admin', admin.site.urls), 
+    path('admin/', admin.site.urls), 
+    path('', MainPageView.as_view(), name='main-page'),
+    path('about/', About.as_view(), name="about"),
+    path('panel/', PanelView.as_view(), name='panel-page'),
+    path("login/", PanelLogin.as_view(), name="panel-login"),
+    path("registrate/", registro , name= "registrate"),
+    path('productos/crear', PorductosCreateView.as_view(), name ="crear-producto" ),
+
     path('pagina', saludo), 
     path('boot', index),
-    path("login/", PanelLogin.as_view(), name="panel-login"),  ## acordarse de poner siempre name= link
-    path("registrate/", signUpView.as_view(), name= "registrate"),
+    
  
     
 ]
