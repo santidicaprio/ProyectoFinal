@@ -5,7 +5,7 @@ from AppFinal.forms import MiFormulario
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView
-from django.views.generic import ListView, TemplateView, View, DetailView
+from django.views.generic import ListView, TemplateView, View, DetailView, DeleteView
 from .models import Productos
 from .forms import UserRegisterForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -90,6 +90,16 @@ class ProductoDetailView(DetailView):
     
     
 ## Hasta aca modificacion 
+
+class eliminarProducto(DeleteView):
+    model = Productos
+    template_name = 'productos/eliminar_producto.html'
+    success_url = reverse_lazy("panel-page")
+
+
+
+
+
 
 
 

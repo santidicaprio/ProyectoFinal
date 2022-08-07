@@ -27,7 +27,7 @@
                             <th scope="row"></th>
                             <td>
                                 <a type="button" href="#" class="btn btn-sm btn-outline-warning">Editar</a>
-                                <a type="button" href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                <a type="button" href="{% url "eliminar-producto" Productos.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
                             </td>
                             <td>{{Productos.marca}}</td>
                             <td>{{Productos.categoria}}</td>

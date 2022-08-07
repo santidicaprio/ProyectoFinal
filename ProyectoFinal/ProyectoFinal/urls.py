@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path, include
-from AppFinal.views import PanelLogin, MainPageView, About, PanelView, registro, PorductosCreateView, ProductoDetailView
+from AppFinal.views import PanelLogin, MainPageView, About, PanelView, registro, PorductosCreateView, ProductoDetailView, eliminarProducto
  
 
 
@@ -31,6 +31,7 @@ urlpatterns = [
     path("registrate/", registro , name= "registrate"),
     path('productos/crear', PorductosCreateView.as_view(), name ="crear-producto" ),
     path('detalle/productos/<pk>/', ProductoDetailView.as_view(), name="detalle-producto"),
+    path('eliminarProducto/<pk>/delete', eliminarProducto.as_view(), name="eliminar-producto"),
 
     
 ]

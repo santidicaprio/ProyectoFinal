@@ -1,0 +1,15 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+<form action="post">
+    {% csrf_token %}
+    <h3>¿Desea eliminar el producto?</h3>
+    <button class="btn btn-danger" type="submit">Sí, eliminar</button>
+    <a href="{% url 'main-page' %}"  Productos.id %}"></a>
+
+
+
+
+
+</form>
+{% endblock %}
