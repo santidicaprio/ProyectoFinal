@@ -16,9 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path, include
-
-from AppFinal.views import saludo
-from AppFinal.views import index, PanelLogin, MainPageView, About, PanelView, registro, PorductosCreateView
+from AppFinal.views import PanelLogin, MainPageView, About, PanelView, registro, PorductosCreateView
  
 
 
@@ -31,8 +29,7 @@ urlpatterns = [
     path("registrate/", registro , name= "registrate"),
     path('productos/crear', PorductosCreateView.as_view(), name ="crear-producto" ),
 
-    path('pagina', saludo), 
-    path('boot', index),
+    
     
  
     
