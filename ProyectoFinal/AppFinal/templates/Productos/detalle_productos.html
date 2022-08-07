@@ -1,0 +1,25 @@
+{% extends "principal/base.html" %}
+
+{% block main %}
+  <section class="py-5 text-center container">
+    <a type="button" href="{% url 'main-page' %}" class="btn btn-sm btn-outline-primary">Volver a Home </a> 
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">{{Productos.categoria}}</h1>
+        <p class="lead text-muted">{{Productos.tipo}}</p>
+       
+      </div>
+    </div>
+  </section>
+  <main class="flex-shrink-0">
+    <div class="container">
+      <div style="text-align:center;">
+        <img height="270" src= "{{ Productos.image.url }}" /> 
+      </div>
+      <div style="padding-top: 2em;">
+       
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

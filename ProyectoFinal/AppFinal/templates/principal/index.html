@@ -24,7 +24,7 @@
         {% for Productos in Productos %}
         <div class="col">
           <div class="card shadow-sm">
-            <img height="225" src="#" />  
+            <img height="270" src="{{ Productos.image.url }}" />  
             <div class="card-body">
               <h5 class="card-title">{{Productos.categoria}}</h5>
               <p class="card-text">{{Productos.tipo}}</p>
@@ -33,11 +33,11 @@
                 {%if user.can_edit%}
                   <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
                 {% endif %} 
-                <a type="button" href="#" class="btn btn-sm btn-outline-secondary">Buscar Productos </a>
+                <a type="button" href="{% url "detalle-producto" Productos.id %}" class="btn btn-sm btn-outline-secondary"> Detalle Producto </a>
                 </div>
                 <small class="text-muted">{{Productos.precio}}</small>
               </div>
-            </div>
+            </div> 
           </div>
         </div>
         {% endfor %}

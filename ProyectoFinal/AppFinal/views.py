@@ -56,14 +56,15 @@ class MainPageView(BaseView, ListView):
     context_object_name = "Productos"
     template_name = "principal/index.html"
     
+    
 ##
 
-## baseviews productos
+## baseviews productos (Falta borrar y editar producto)
 
 class PorductosCreateView(LoginRequiredMixin, CreateView):
     model = Productos
     fields = ['marca','categoria' , 'tipo', 'fecha_Vto', 'precio','image']
-    template_name = "Usuarios/productosform.html"
+    template_name = "productos/productosform.html"
     success_url = reverse_lazy("panel-page")
 
 
@@ -71,8 +72,21 @@ class PorductosCreateView(LoginRequiredMixin, CreateView):
 class PanelView(LoginRequiredMixin, BaseView, ListView):
     
     queryset = Productos.objects.all()
-    template_name = "Usuarios/productos.html"    
+    template_name = "productos/productos.html"    
     context_object_name = "Productos"
+    
+    
+class ProductoDetailView(DetailView):
+
+    model = Productos
+    context_object_name = "Productos"
+    template_name = "productos/detalle_productos.html" 
+
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Productos'] = Productos.objects.order_by('categoria').first()
+        return context
     
     
 ## Hasta aca modificacion 
