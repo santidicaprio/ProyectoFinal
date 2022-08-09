@@ -1,23 +1,28 @@
 {% extends "principal/base.html" %}
 
 {% block main %}
-
+<header class="py-25 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
   <section class="py-5 text-center container">
     <div class="py-5 text-end ">
       <a type="button"  href = "{% url "panel-login" %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary"> Ingresar </a>
       <a type="button"  href = "{% url "registrate" %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary"> Registrate </a>
-    </div>
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light"> Panel Empleados </h1>
-        <p class="lead text-muted">Supermercado Alegria </p>
-        <p class="lead text-muted">Productos </p>
-       
-      </div>
+      
+    
+      <div class="row py-lg-5 text-center">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light text-white fs-1 fw-bolder"> Panel Empleados </h1>
+          <p class="lead text-muted text-white fw-bolder">Supermercado Alegria </p>
+          <p class="lead text-muted text-white fw-bolder">Productos </p>
+         
+        </div>
+     </div>
+    
     </div>
   </section>
+</header>
 
-  <div class="album py-5 bg-light">
+
+<div class="album py-5 bg-light">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -43,9 +48,11 @@
         {% endfor %}
       </div>
     </div>
-  </div>
+</div>
+<div class="text-center">
 
   <a href="{% url 'main-page' %}  ">Volver Arriba</a>
+</div>
 
  
 {% endblock %}

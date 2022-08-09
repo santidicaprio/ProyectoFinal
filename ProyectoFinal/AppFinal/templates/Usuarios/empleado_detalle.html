@@ -1,0 +1,30 @@
+{% extends "principal/base.html" %}
+
+{% block main %}
+<a type="button" href= "{% url "empleado-editar" user.id %}" class="btn btn-sm btn-outline-success">Editar Perfil </a> <br></br>
+<a href="{% url 'panel-page' %}"> Volver a Productos </a>
+
+
+<section class="py-5  container">
+     
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Usuario: {{Empleado.usuario}}</h1>
+        <p class="fw-light">Nombre: {{Empleado.nombre}}</p>
+        <p class="fw-light">Apellido: {{Empleado.apellido}}</p>
+       
+      </div>
+    </div>
+  </section>
+  <main class="flex-shrink-0">
+    <div class="container">
+      <div style="text-align:center;">
+        <img height="270" src= "{{ Empleado.imagen.url }}" /> 
+      </div>
+      <div style="padding-top: 2em;">
+       
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

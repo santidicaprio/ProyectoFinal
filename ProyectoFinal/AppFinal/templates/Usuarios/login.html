@@ -1,76 +1,29 @@
 {% extends "principal/base.html" %}
 
 {% block main %}
-<style>
-  html,
-  body {
-    height: 100%;
-  }
-
-  main {
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #f5f5f5;
-  }
-
-  .form-signin {
-    max-width: 330px;
-    padding: 15px;
-  }
-
-  .form-signin .form-floating:focus-within {
-    z-index: 2;
-  }
-
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-</style>
 
 <body class="text-center">
 
-<main class="form-signin w-100 m-auto">
-    
+  <main class="form-signin w-100 m-auto">
+      <form method="POST">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal"> Ingresa a tu cuenta </h1>
+        <br></br>
+         {{form.as_p}}
         
-        <form    action="" method="POST" > {% csrf_token %} 
-           
-           <h1 class="h3 mb-3 fw-normal"> Ingresa a tu cuenta </h1>
-          
-          
-           <div class="form-floating" >
-               <input type="email" class="form-control"  id="floatingInput" placeholder="name@example.com">
-               <label for="floatingInput">Email </label>
-             </div>
-             <div class="form-floating">
-               <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-               <label for="floatingPassword">Contraseña</label>
-             </div>
-         
-             <div class="checkbox mb-3">
-               <label>
-                 <input type="checkbox" value="remember-me"> Recordame
-               </label>
-             </div>
-             <a type="button"  href = "{% url 'panel-page' %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary"> Ingresar </a>
-             <br></br>
-             <a type="button"  href = "{% url "registrate" %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary"> Registrate </a>
-             
-   
-           
-           
-   
-         </form>
-</main>
+         <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Recordame
+            </label>
+          </div>
+        <button type="submit" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary">Ingresar</button>
+        <br></br>
+        <a type="button"  href = "{% url "registrate" %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary"> Registrate </a>
+        
+      </form>
+     
+  </main>
   
 </body>
+  
 {% endblock %}

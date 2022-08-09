@@ -1,44 +1,30 @@
 from django.shortcuts import render
-from urllib import request
-from django.http import HttpResponse
-from AppFinal.forms import MiFormulario
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView
-from django.views.generic import ListView, TemplateView, View, DetailView, DeleteView
-from .models import Productos
+from django.views.generic import ListView, TemplateView, View, DetailView, DeleteView, UpdateView
+from .models import Productos, Contacto, Empleado
 from .forms import UserRegisterForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
+def dummy(request):
+    render(request, "")
 
-# Loguearse
 
 class PanelLogin(LoginView):
     template_name = 'Usuarios/login.html'
-    next_page = reverse_lazy("panel-login")
-        
+    next_page = reverse_lazy("panel-page")
+          
 class PanelLogout(LogoutView):
-    template_name = 'principal/index.html'   
+    template_name = 'Usuarios/logout.html'
     
-## creacion del usuario
-def registro(request):
-    if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            
-            username = form.cleaned_data['username']
-            form.save()
-            return render(request, "Usuarios/login.html", {"mensajes": "Usuario Creado"} )
-    else:
-        form = UserRegisterForm()
-    return render(request, "Usuarios/registro.html", {"form": form})
 
-
-# 
-
-
-#pagina Principal
 
 class BaseView(View):
 
@@ -48,54 +34,88 @@ class BaseView(View):
         return context    
 
 class About(BaseView, TemplateView):
-
     template_name = "principal/about.html"
+    
+class Contactame(CreateView):
+    model = Contacto
+    fields = ['usuario', 'dni', 'mensaje']
+    template_name = "principal/contactame.html"
+    success_url = reverse_lazy('main-page')
+    
 
 class MainPageView(BaseView, ListView):
     queryset = Productos.objects.all()
     context_object_name = "Productos"
     template_name = "principal/index.html"
-    
-    
-##
 
-## baseviews productos (Falta borrar y editar producto)
+class PanelView(LoginRequiredMixin, BaseView, ListView):
+    queryset = Productos.objects.all()
+    template_name = "Productos/productos.html"    
+    context_object_name = "Productos"
+    
+
 
 class PorductosCreateView(LoginRequiredMixin, CreateView):
     model = Productos
-    fields = ['marca','categoria' , 'tipo', 'fecha_Vto', 'precio','image']
-    template_name = "productos/productosform.html"
+    fields = ['marca','categoria', 'tipo', 'fecha_Vto', 'precio','image']
+    template_name = "Productos/productosform.html"
     success_url = reverse_lazy("panel-page")
-
-
-
-class PanelView(LoginRequiredMixin, BaseView, ListView):
-    
-    queryset = Productos.objects.all()
-    template_name = "productos/productos.html"    
-    context_object_name = "Productos"
     
     
-class ProductoDetailView(DetailView):
+class detalleProductos(DetailView):
 
     model = Productos
     context_object_name = "Productos"
-    template_name = "productos/detalle_productos.html" 
+    template_name = "Productos/detalle_productos.html" 
 
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['Productos'] = Productos.objects.order_by('categoria').first()
         return context
-    
-    
-## Hasta aca modificacion 
+        
 
-class eliminarProducto(DeleteView):
+class eliminarProducto(LoginRequiredMixin, BaseView, DeleteView):
     model = Productos
-    template_name = 'productos/eliminar_producto.html'
+    template_name = 'Productos/eliminar_producto.html'
     success_url = reverse_lazy("panel-page")
 
+class editarProducto(LoginRequiredMixin, BaseView, UpdateView):  
+    model = Productos
+    fields = ['marca','categoria', 'tipo', 'fecha_Vto', 'precio', 'image']
+    template_name = 'Productos/editar_productos.html'
+    success_url = reverse_lazy('panel-page')
+
+class PerfilEmpleado(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+
+    model = Empleado
+    template_name = "Usuarios/empleado_detalle.html"
+    context_object_name = "Empleado"
+    
+    def test_func(self):
+        return self.request.user.id == int(self.kwargs['pk'])
+
+
+
+class EditarEmpleado(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+    model = User
+    template_name = "Usuarios/user_form.html"
+    fields = ["email", "first_name", "last_name"]
+
+    def get_success_url(self):
+        return reverse_lazy("empleado-detalle", kwargs={"pk": self.request.user.id})
+    
+    def test_func(self):
+        return self.request.user.id == int(self.kwargs['pk'])
+    
+
+    
+class crearCuentaUsuario(SuccessMessageMixin, CreateView):
+  template_name = 'Usuarios/crear_cuenta_form.html'
+  success_url = reverse_lazy('panel-page')
+  form_class = UserCreationForm
+  success_message = "¡¡ Se creo tu usuario satisfactoriamente !!"
 
 
 

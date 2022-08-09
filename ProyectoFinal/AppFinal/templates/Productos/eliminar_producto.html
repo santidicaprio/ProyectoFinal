@@ -1,15 +1,17 @@
 {% extends "principal/base.html" %}
 
-{% block content %}
-<form action="post">
-    {% csrf_token %}
-    <h3>¿Desea eliminar el producto?</h3>
-    <button class="btn btn-danger" type="submit">Sí, eliminar</button>
-    <a href="{% url 'main-page' %}"  Productos.id %}"></a>
+{% block main %}
 
-
-
-
-
-</form>
+<main class="flex-shrink-0">
+    <div class="container">
+        <a type="button" href = "{% url 'panel-page' %}" style="margin-top: 1em;" class="btn btn-sm btn-outline-primary" >Volver al Panel</a> <br></br>
+        <form method="post">{% csrf_token %}
+            <p> Estas seguro que quieres borrar {{object }}?</p>
+            {{ form }}
+            <input type="submit" value="Confirmar">
+        </form>
+        <a href="{% url 'panel-page' %}"></a>
+    </div>
+</main>
 {% endblock %}
+
